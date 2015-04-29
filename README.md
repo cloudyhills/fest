@@ -4,7 +4,9 @@ Files backed up rESTfully
 ````
 {
     "name": "my_backup",
+    "timestamp": "1985-10-26T21:45:00",
     "base": "/var/www/edgiese.com/public"
+    "omit": ["tmp/*", ".git/*"],
     "files": {
         "./index.php": {
             "hash": "1234567890ABCDEF1234567890ABCDEF12345678",
@@ -22,10 +24,16 @@ Files backed up rESTfully
             "group":"apache",
             "permissions":644
         }
-        
-    ],
-    "omit": ["tmp/*", ".git/*"],
-    "private": ["configuration.php"] 
+    },    "omit": ["tmp/*", ".git/*"],
+
+    "directories": {
+        "./subdir": {
+            "timestamp": "2015-04-15T00:00:00+0000",
+            "user":"edgiese",
+            "group":"apache",
+            "permissions":644
+        }
+    }
 }
 ````
 
@@ -33,12 +41,23 @@ Files backed up rESTfully
 ````
 POST /manifests
 ````
-## Let lists of available manifests
 
+## Get lists of available manifests
+````
 GET /manifests
-GET /manifests/name/my_backup
-GET /manifests/id/012345ABC
-GET /manifests/latest
-GET /files?hash=a123b123,b123c123,d123e343&format=gz
+````
+
+## Get a single manifest
+````
+GET /manifests/name/<name>
+````
+
+## Get a file
+````
 GET /files/a123b1234
+````
+
+##Put a file
+````
 PUT /files/a123b1234
+````
