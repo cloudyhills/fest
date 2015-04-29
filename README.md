@@ -46,7 +46,7 @@ Each backup job is divided into a `manifest` and zero or more `files`.  The mani
 ````
 The manifest's role is to provide enough information to reproduce the files and directories that were backed up exactly.  It is up to the client side to make sure that the task has adequate permissions to restore the files with the same ownership and permissions that were saved.  Fest only stores contents with a file, not permission or directory location.
 
-Note that directories are specified separately from files, and there is no data for the "contents" of directories saved.  The manifest is (mostly) untouched by fest; only the "availability" field will change.  When a client uploads a manifest, fest will save it, and update the file list with the correct availability.  A value of 0 means the file must be uploaded, and -1 means the file is already available and need not be uploaded.
+Note that directories are specified separately from files, and there is no data for the "contents" of directories saved.  The manifest is (mostly) untouched by fest, with the exception of `is_available` and `available_bytes` fields. THe former is a boolean that is true only if the entire file has been successfully uploaded and hashed. The latter, if a file is partially uploaded, indicates the zero-indexed (size - 1 is the highest possible value) ranges of bytes that have been successfully uploaded to the service.
 
 ### Client Side Operation and Requirements
 
@@ -70,9 +70,9 @@ POST /manifests
 GET /manifests
 ````
 
-## Get a single manifest
+## Get a single manifest (names are namespaced per-user)
 ````
-GET /manifests/name/<name>
+GET /manifests/<name>
 ````
 
 ## Get a file
