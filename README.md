@@ -27,6 +27,7 @@ Each backup job is divided into a `manifest` and zero or more `files`.  The mani
             "hash": "1234567890ABCDEF1234567890ABCDEF12345678",
             "timestamp": "2015-04-15T00:00:00+0000",
             "is_available": true,
+            "size": 24488,
             "user":"edgiese",
             "group":"apache",
             "permissions":644
