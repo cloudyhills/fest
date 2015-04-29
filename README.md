@@ -16,7 +16,9 @@ Each backup job is divided into a `manifest` and zero or more `files`.  The mani
         "./index.php": {
             "hash": "1234567890ABCDEF1234567890ABCDEF12345678",
             "timestamp": "2015-04-15T00:00:00+0000",
-            "availability": -1,
+            "is_available": false,
+            "available_bytes": [[0, 5000], [10000, 12345]]
+            "size":12345,
             "user":"iansltx",
             "group":"iansltx",
             "permissions":777
@@ -24,7 +26,7 @@ Each backup job is divided into a `manifest` and zero or more `files`.  The mani
         "./subdir/blah.php": {
             "hash": "1234567890ABCDEF1234567890ABCDEF12345678",
             "timestamp": "2015-04-15T00:00:00+0000",
-            "availablility": 0,
+            "is_available": true,
             "user":"edgiese",
             "group":"apache",
             "permissions":644
