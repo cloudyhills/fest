@@ -85,33 +85,29 @@ This returns the following header and body:
 Server: ....
 Allow: GET,HEAD,POST,OPTIONS,TRACE
 Content-Type: Application/octet-binary
+Accept-Ranges: bytes
 
-{
-  "POST": {
-    "description": "Create a file",
-    "parameters": {
-      "length": {
-        "type": "integer",
-        "description": "File Length",
-        "required": true
-      },
-      "offset": {
-        "type": "integer",
-        "description": "offset into file"
-        "required": false
-      }
-    }
-}
+204 NO CONTENT
 ````
-Note That the `offset` parameter **may not be there**.  This needs to be checked by the application to determine whether partial file uploads are allowed.
-
+The purpose of this method is to determine if this fest version supports partial uploads.  If the `Accept-Ranges` header includes `bytes` then it is possible, otherwise, not.
 
 ## Get a file
 ````
 GET /files/a123b1234
+
+Accept-Ranges: bytes
+Content-Range: bytes 0-199/*
+
 ````
+Note that if the fest API instance doesn't support ranges, then it will return a `416` status.  A fest API instance should support ranges for GET if it supports it for 
+
 
 ##Put a file
 ````
-PUT /files/a123b1234?length=nn&offset=nn
+PUT /files/a123b1234
+
+[Header]
+
+Content-Range: bytes 21010-47021/47022
+
 ````
