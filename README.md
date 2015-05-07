@@ -10,7 +10,8 @@ Each backup job is divided into a `manifest` and zero or more `files`.  The mani
 {
     "name": "my_backup",
     "timestamp": "1985-10-26T21:45:00",
-    "base": "/var/www/edgiese.com/public"
+    "working_directory": "/var/www/edgiese.com/public",
+    "pathspec": "*"
     "omit": ["tmp/*", ".git/*"],
     "files": {
         "./index.php": {
